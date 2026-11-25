@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tareas</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h1>Tareas</h1>
+  <form action="/tareas" method="post">
+    <label for="titulo">Nueva tarea</label>
+    <input id="titulo" name="titulo" type="text" maxlength="120" required>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <% if (tareas.length === 0) { %>
+    <p>Todavía no hay tareas.</p>
+  <% } else { %>
+    <ul>
+      <% tareas.forEach((tarea) => { %>
+        <li><%= tarea.titulo %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+  <p><a href="/">Volver al inicio</a></p>
+</body>
+</html>
