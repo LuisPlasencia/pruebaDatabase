@@ -1,0 +1,12 @@
+<% if (flash) { %>
+  <div class="panel-message" data-severity="<%= flash.severity %>" role="status"><%= flash.text %></div>
+<% } %>
+<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+  <div class="panel-message" role="alert">
+    <ul class="message-list">
+      <% errors.forEach((errorText) => { %>
+        <li><%= errorText %></li>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>

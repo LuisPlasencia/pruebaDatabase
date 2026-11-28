@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/nav') %>
+    <main class="page">
+      <h1 class="page-title">Mis routers</h1>
+      <%- include('partials/messages') %>
+      <form class="inline-form-card" action="/routers" method="post">
+        <label class="form-field">
+          Nombre del router
+          <input name="nombre" type="text" maxlength="60" placeholder="Router del laboratorio" value="<%= values.nombre || '' %>" required>
+        </label>
+        <label class="form-field">
+          Dirección IP
+          <input name="direccionIp" type="text" maxlength="45" placeholder="192.168.1.1" value="<%= values.direccionIp || '' %>" required>
+        </label>
+        <button class="button button-primary" type="submit">Añadir router</button>
+      </form>
+
+      <% if (routers.length === 0) { %>
+        <p class="empty-state">Todavía no has añadido ningún router. Usa el formulario de arriba para registrar el primero.</p>
+      <% } else { %>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección IP</th>
+                <th scope="col">Añadido</th>
+                <th scope="col"><span class="visually-hidden">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% routers.forEach((routerItem) => { %>
+                <tr>
+                  <td><%= routerItem.nombre %></td>
+                  <td class="cell-mono"><%= routerItem.direccion_ip %></td>
+                  <td><%= routerItem.creado_en.toLocaleDateString('es-ES') %></td>
+                  <td class="cell-actions">
+                    <form action="/routers/<%= routerItem.id %>/eliminar" method="post">
+                      <button class="button button-small button-danger" type="submit">Eliminar</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

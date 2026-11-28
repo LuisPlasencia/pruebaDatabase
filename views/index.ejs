@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<html lang="es">
+  <%- include('partials/head') %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><a href="/tareas">Ver tareas</a></p>
+    <%- include('partials/nav') %>
+    <main class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title"><%= title %></h1>
+        <p class="hero-course">Tecnologías y Arquitecturas de Redes de Comunicación Emergentes</p>
+        <% if (currentUser) { %>
+          <p class="hero-text">Hola, <%= currentUser.nombre %>. Añade los routers de tu red y consulta cuántos tienes desde tu perfil.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/routers">Mis routers</a>
+            <a class="button" href="/perfil">Mi perfil</a>
+          </div>
+        <% } else { %>
+          <p class="hero-text">Crea una cuenta para registrar los routers de tu red y consultarlos desde tu perfil.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/registro">Crear cuenta</a>
+            <a class="button" href="/login">Iniciar sesión</a>
+          </div>
+        <% } %>
+      </div>
+      <%- include('partials/network') %>
+    </main>
+    <%- include('partials/footer') %>
   </body>
 </html>

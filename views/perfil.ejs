@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/nav') %>
+    <main class="page">
+      <h1 class="page-title">Mi perfil</h1>
+      <%- include('partials/messages') %>
+      <div class="profile-layout">
+        <div class="stat-tile profile-stat">
+          <span class="stat-value"><%= totalRouters %></span>
+          <span class="stat-label"><%= totalRouters === 1 ? 'router añadido' : 'routers añadidos' %></span>
+          <a class="button button-primary button-small" href="/routers">Gestionar mis routers</a>
+        </div>
+        <dl class="profile-details">
+          <dt>Nombre</dt>
+          <dd><%= currentUser.nombre %></dd>
+          <dt>Email</dt>
+          <dd><%= currentUser.email %></dd>
+          <dt>Tipo de cuenta</dt>
+          <dd><span class="role-badge" data-role="<%= currentUser.rol %>"><%= currentUser.rol === 'admin' ? 'Administrador' : 'Usuario' %></span></dd>
+          <dt>Miembro desde</dt>
+          <dd><%= currentUser.creado_en.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) %></dd>
+        </dl>
+      </div>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

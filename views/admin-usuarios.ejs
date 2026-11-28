@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/nav') %>
+    <main class="page">
+      <h1 class="page-title">Cuentas registradas</h1>
+      <%- include('partials/messages') %>
+      <p>Al eliminar una cuenta también se eliminan todos sus routers.</p>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Email</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Routers</th>
+              <th scope="col">Registro</th>
+              <th scope="col"><span class="visually-hidden">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach((user) => { %>
+              <tr>
+                <td><%= user.nombre %></td>
+                <td><%= user.email %></td>
+                <td><span class="role-badge" data-role="<%= user.rol %>"><%= user.rol === 'admin' ? 'Administrador' : 'Usuario' %></span></td>
+                <td><%= user.total_routers %></td>
+                <td><%= user.creado_en.toLocaleDateString('es-ES') %></td>
+                <td class="cell-actions">
+                  <% if (user.id === currentUser.id) { %>
+                    <span class="cell-note">Tu cuenta</span>
+                  <% } else { %>
+                    <form action="/admin/usuarios/<%= user.id %>/eliminar" method="post" onsubmit="return confirm('¿Eliminar esta cuenta y todos sus routers?');">
+                      <button class="button button-small button-danger" type="submit">Eliminar cuenta</button>
+                    </form>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

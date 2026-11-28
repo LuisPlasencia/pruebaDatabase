@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/nav') %>
+    <main class="page">
+      <h1 class="page-title">Iniciar sesión</h1>
+      <div class="form-card">
+        <%- include('partials/messages') %>
+        <form action="/login" method="post">
+          <label class="form-field">
+            Email
+            <input name="email" type="email" autocomplete="email" value="<%= values.email || '' %>" required>
+          </label>
+          <label class="form-field">
+            Contraseña
+            <input name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button class="button button-primary" type="submit">Iniciar sesión</button>
+        </form>
+        <p class="form-switch">¿No tienes cuenta? <a href="/registro">Crea una</a></p>
+      </div>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>
